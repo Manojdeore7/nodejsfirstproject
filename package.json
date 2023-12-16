@@ -1,0 +1,15 @@
+{
+  "name": "generalpractice",
+  "version": "1.0.0",
+  "description": "This is just for prctice",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Manoj Deore",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
