@@ -1,14 +1,18 @@
 let express = require("express");
 let app = express();
-
-app.use((req, res, next) => {
-  console.log("I am in first middle ware");
-  next();
+let bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/add-product", (req, res, next) => {
+  res.send(
+    "<form action='/product' method='POST'><input  name='title'/><button type='submit'>click</button></form>"
+  );
 });
 
-app.use((req, res) => {
-  console.log("I am in second middle ware");
-  res.set("Content-Type", "text/html");
-  res.send("<h1>ji</h1>");
+app.use("/product", (req, res) => {
+  console.log(req.body.title);
+  res.redirect("/");
 });
-app.listen(3000);
+app.use("/", (req, res) => {
+  res.send("nothing");
+});
+app.listen(7000);
