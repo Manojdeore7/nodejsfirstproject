@@ -6,10 +6,16 @@ routes.get("/add-product", (req, res, next) => {
     "<form action='/product' method='POST'><input  name='title'/><button type='submit'>click</button></form>"
   );
 });
+routes.get("/login", (req, res, next) => {
+  res.send(
+    "<form action='/product' method='POST' ><input  name='username'/><button type='submit'>Login</button></form>"
+  );
+});
 
 routes.post("/product", (req, res) => {
-  console.log(req.body.title);
-  res.redirect("/");
+  res.send(
+    `<script>localStorage.setItem("username", "${req.body.username}");</script>`
+  );
 });
 
 module.exports = routes;
