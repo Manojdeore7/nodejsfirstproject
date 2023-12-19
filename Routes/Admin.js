@@ -1,21 +1,16 @@
 const express = require("express");
 const routes = express.Router();
-
+const path = require("path");
 routes.get("/add-product", (req, res, next) => {
-  res.send(
-    "<form action='/product' method='POST'><input  name='title'/><button type='submit'>click</button></form>"
-  );
+  res.sendFile(path.join(__dirname, "../", "HtmlFiles", "add-product.html"));
 });
 routes.get("/login", (req, res, next) => {
-  res.send(
-    "<form action='/product' method='POST' ><input  name='username'/><button type='submit'>Login</button></form>"
-  );
+  res.sendFile(path.join(__dirname, "../", "HtmlFiles", "login.html"));
 });
 
 routes.post("/product", (req, res) => {
-  res.send(
-    `<script>localStorage.setItem("username", "${req.body.username}");</script>`
-  );
+  console.log(`${req.body.username} is login!!!`);
+  res.redirect("/");
 });
 
 module.exports = routes;
