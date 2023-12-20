@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link  href="./style/index.css " rel="stylesheet" type="text/css">
+    
+</head>
+<body>
+    <header>
+        <ul>
+            <li> <a href="./">Home</a></li>
+            <li> <a href="./login">Login</a></li>
+            <li> <a href="./add-product">Add-Product</a></li>
+        </ul>
+       
+    </header>
+    <h3 class="hi">Hi your are at Home Page,And following are the products</h3>
+    
+
+    <ul>
+        <% for (item of products) { %>
+          <h1> <%= item.productname %> </h1>
+        <% } %>
+      </ul>
+    
+       
+</body>
+</html>
