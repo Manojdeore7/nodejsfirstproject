@@ -1,6 +1,7 @@
 const product = [
   {
     productname: "product 1",
+    id: 1,
   },
 ];
 
