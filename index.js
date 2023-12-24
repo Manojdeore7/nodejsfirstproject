@@ -7,7 +7,11 @@ let fs = require("fs");
 app.set("view engine", "ejs");
 app.set("views", "./View");
 let db = require("./util/database");
-db.execute("SELECT * FROM firsttable");
+let x = db.execute("SELECT * FROM products");
+x.then((d) => {
+  console.log(d[1][0].orgTable);
+});
+
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "View"))); //for make working of css
