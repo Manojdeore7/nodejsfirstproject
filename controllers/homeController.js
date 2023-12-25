@@ -1,8 +1,8 @@
-const path = require("path");
 const { getData } = require("../models/AllData");
 
-const homeController = (req, res) => {
-  let products = getData();
+const homeController = async (req, res) => {
+  let products = await getData();
+
   res.render("index", { products: products });
 };
 module.exports = homeController;

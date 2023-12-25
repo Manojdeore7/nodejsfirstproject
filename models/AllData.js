@@ -1,19 +1,22 @@
-const fs = require("fs");
-const path = require("path");
+let db = require("../util/database");
 exports.getData = () => {
-  let path1 = path.join(__dirname, "data.json");
-  let data = fs.readFileSync(path1) || [];
-  let products = JSON.parse(data);
-
+  let products = db
+    .execute("SELECT * FROM products")
+    .then((result) => {
+      return result[0];
+    })
+    .catch((err) => console.log(err));
   return products;
 };
 
 exports.addData = (p) => {
-  let path1 = path.join(__dirname, "data.json");
-  let data = fs.readFileSync(path1) || [];
-  let products = JSON.parse(data);
-  products.push(p);
-  data = JSON.stringify(products);
-
-  fs.writeFileSync(path1, data);
+  let { title, id } = p;
+  db.execute(
+    `INSERT INTO products (title,descriptio,id,img) VALUES ('${title}',"fourth product",'${id}','#');`
+  )
+    .then((e) => {
+      console.log("product is added");
+    })
+    .catch((err) => console.log(err));
+  return true;
 };

@@ -1,16 +1,13 @@
 let express = require("express");
+let Product = require("./models/allData1");
 let adminPage = require("./Routes/Admin");
 let path = require("path");
 let HomePage = require("./Routes/Home");
+let sequelize = require("./util/database");
 let app = express();
 let fs = require("fs");
 app.set("view engine", "ejs");
 app.set("views", "./View");
-let db = require("./util/database");
-let x = db.execute("SELECT * FROM products");
-x.then((d) => {
-  console.log(d[1][0].orgTable);
-});
 
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,4 +18,12 @@ app.use(HomePage);
 app.use("/", (req, res) => {
   res.status(404).render("404", { title: "page not found" });
 });
-app.listen(1000);
+
+sequelize
+  .sync()
+  .then((result) => {
+    app.listen(1000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });

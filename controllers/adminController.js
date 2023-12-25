@@ -7,17 +7,20 @@ exports.addProductController = (req, res, next) => {
 exports.loginController = (req, res, next) => {
   res.sendFile(path.join(__dirname, "../", "View", "login.html"));
 };
-exports.productController = (req, res) => {
-  addData({
-    productname: req.body.product,
+exports.productController = async (req, res) => {
+  // let value=
+  let va = addData({
+    title: req.body.product,
     id: Math.random() * 100,
   });
 
-  res.redirect("/");
+  setTimeout(() => {
+    res.redirect("/");
+  }, 2000);
 };
-exports.getProduct = (req, res) => {
+exports.getProduct = async (req, res) => {
   id = req.params.productId;
-  let data = getData();
+  let data = await getData();
 
   for (let i = 0; i < data.length; i++) {
     if (id == data[i].id) {
