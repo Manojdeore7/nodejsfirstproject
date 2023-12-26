@@ -6,8 +6,29 @@
     <title>Document</title>
 </head>
 <body>
+    <header>
+        <ul>
+            <li> <a href="./">Home</a></li>
+            <li> <a href="./login">Login</a></li>
+            <li> <a href="./add-product">Add-Product</a></li>
+        </ul>
+       
+    </header>
     <form action='/product' method='POST' >
-        <input  name='product'/>
+        <lable>Id</lable>
+        <input type="text" name='id'/>
+
+        <lable>Title</lable>
+        <input type="text" name='title'/>
+
+        <lable>price</lable>
+        <input type="number" name='price'/>
+
+        <lable>image Url</lable>
+        <input type="url" name='img'/>
+        
+        <lable>Description</lable>
+        <input type="text" name='description'/>
         <button type='submit'>Submit</button>
     </form>
 

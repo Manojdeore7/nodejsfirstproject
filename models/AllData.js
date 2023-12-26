@@ -1,22 +1,25 @@
-let db = require("../util/database");
-exports.getData = () => {
-  let products = db
-    .execute("SELECT * FROM products")
-    .then((result) => {
-      return result[0];
-    })
-    .catch((err) => console.log(err));
-  return products;
-};
+const Sequelize = require("sequelize");
+const sequelize = require("../util/database");
 
-exports.addData = (p) => {
-  let { title, id } = p;
-  db.execute(
-    `INSERT INTO products (title,descriptio,id,img) VALUES ('${title}',"fourth product",'${id}','#');`
-  )
-    .then((e) => {
-      console.log("product is added");
-    })
-    .catch((err) => console.log(err));
-  return true;
-};
+const Product = sequelize.define("Product", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  title: Sequelize.STRING,
+  price: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  image: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+module.exports = Product;

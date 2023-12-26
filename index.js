@@ -1,5 +1,5 @@
 let express = require("express");
-let Product = require("./models/allData1");
+let Product = require("./models/AllData");
 let adminPage = require("./Routes/Admin");
 let path = require("path");
 let HomePage = require("./Routes/Home");

@@ -1,6 +1,7 @@
 const path = require("path");
-const { addData } = require("../models/AllData");
-const { getData } = require("../models/AllData");
+
+const Product = require("../models/AllData");
+
 exports.addProductController = (req, res, next) => {
   res.render("add-product");
 };
@@ -8,11 +9,15 @@ exports.loginController = (req, res, next) => {
   res.sendFile(path.join(__dirname, "../", "View", "login.html"));
 };
 exports.productController = async (req, res) => {
-  // let value=
-  let va = addData({
-    title: req.body.product,
-    id: Math.random() * 100,
-  });
+  Product.create({
+    id: req.body.id,
+    title: req.body.title,
+    price: req.body.price,
+    image: req.body.img,
+    description: req.body.description,
+  })
+    .then((result) => {})
+    .catch((err) => {});
 
   setTimeout(() => {
     res.redirect("/");
@@ -20,13 +25,20 @@ exports.productController = async (req, res) => {
 };
 exports.getProduct = async (req, res) => {
   id = req.params.productId;
-  let data = await getData();
-
-  for (let i = 0; i < data.length; i++) {
-    if (id == data[i].id) {
-      var obj = data[i];
-    }
-  }
-
-  res.render("detailPage", obj);
+  Product.findByPk(id)
+    .then((product) => {
+      console.log(product.dataValues);
+      res.render("detailPage", product.dataValues);
+    })
+    .catch((err = {}));
 };
+
+// add data==>Product.create
+
+// get whole data==>Product.findAll
+
+// get only one data===>Product.findByPk
+
+// update single data===> Product.save()
+
+// delete single data===> Product.destroy()
